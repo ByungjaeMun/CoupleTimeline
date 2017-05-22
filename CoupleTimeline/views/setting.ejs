@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Couple Timeline</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel='stylesheet' href='/stylesheets/common.css'>
+    <style>
+    .tdReqUser{
+      padding-bottom: 10px;
+      margin-left: 15px;
+      margin-right: 15px;
+    }
+
+    #recevReq{
+      border:3px solid #87CEFA;
+    }
+
+    #tdtrReqUser{
+      border-left: none;
+      border-right: none;
+      border:3px solid #87CEFA;
+    }
+
+        .cellspace {
+            padding-left: 100px;
+            padding-right: 100px;
+            padding-top: 50px;
+            padding-bottom: 50px;
+        }
+
+        .btnProperty {
+            background-color: pink;
+            border: none;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            font-weight: bold;
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+
+        .btnProperty:hover{
+          background-color: #87CEFA;
+          border: 2px solid #87CEFA;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div>
+        <% if(isCouple){ %>
+            <a href="/main"><img src="/res/icon.png" class="mainIcon"></a>
+            <% }else{ %>
+                <img src="/res/icon.png" class="mainIcon">
+                <% } %>
+
+
+                    <% if(flag==1){ %>
+                        <h2> No such user! </h2>
+                        <% }else if(flag == 2){ %>
+                            <h2> Password mismatch! </h2>
+                            <% }else if(flag == 3){ %>
+                                <h2> This user is already matched! </h2>
+                                <% }else if(flag == 4){ %>
+                                    <h2> You are already matched! </h2>
+                                    <% } %>
+    </div>
+    <ul class="nav">
+        <% if(isCouple){ %>
+            <li><a href="/main">Timeline</a></li>
+            <% } %>
+                <li><a href="/">Log out</a></li>
+    </ul>
+    <div class="col-md-4 col-md-push-1">
+        <table class="container">
+            <tr>
+                <td class="cellspace">
+                    <div class=" form-group">
+                        <label for="recevReq" class="labelFont">Received Requests</label>
+                        <table id="recevReq">
+                            <% for(var i=0; i<reqUsers.length; i++){%>
+                                <tr >
+                                    <td id="tdtrReqUser">
+                                        <h3 class="tdReqUser"><%= reqUsers[i].reqUserId%></h3>
+                                    </td>
+                                    <td id="tdtrReqUser">
+                                        <form action="/setting" method="POST">
+                                            <input type="text" name="requestUser" value="<%=reqUsers[i]._id%>" hidden="true">
+                                            <input type="text" name="requestUserId" value="<%=reqUsers[i].reqUserId%>" hidden="true">
+                                            <input type="submit" name="accept" value="acceptRequest" class="btnProperty btn btn-primary">
+                                            <input type="submit" name="refuse" value="refuseRequest" class="btnProperty btn btn-primary">
+                                        </form>
+                                    </td>
+                                </tr>
+                                <%}%>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="cellspace">
+                    <div class="form-group">
+                        <label for="sendReq" class="labelFont">Send Request</label>
+                        <form action="/setting" method="POST" id="sendReq">
+                            <div class="elementsInline">
+                                <input type="text" placeholder="ID to request" class="form-control" name="idToRequest" required/>
+                                <input type="submit" name="send" value="sendRequest" class="btnProperty btn btn-primary">
+                            </div>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="cellspace">
+                    <div class="form-group">
+                        <label for="removTimeilne" class="labelFont">Remove Timeline</label>
+                        <form action="/setting" method="POST" id="removTimeilne">
+                            <div class="elementsInline">
+                                <input type="password" class="form-control" placeholder="User Password" name="password" required/>
+                                <input type="submit" name="remove" value="removeTimeline" class="btnProperty btn btn-primary">
+                            </div>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Couple Timeline</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel='stylesheet' href='/stylesheets/common.css'>
+    <link rel='stylesheet' href='/stylesheets/main.css'>
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.js"></script>
+    <script src="//code.jquery.com/jquery.min.js"></script>
+    <style media="screen">
+      .divPreview{
+        text-align: center;
+        background-color: white;
+      }
+
+      .btnProperty {
+          margin-bottom: 50px;
+          background-color: pink;
+          border: none;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          font-weight: bold;
+      }
+
+      .btnProperty:hover{
+        background-color: #87CEFA;
+        border: 2px solid #87CEFA;
+      }
+
+      .tablePreview{
+        background-color: white;
+        margin-bottom: 50px;
+      }
+
+      .divCanvas{
+          text-align: center;
+      }
+    </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="http://files.codepedia.info/uploads/iScripts/html2canvas.js"></script>
+</head>
+<body>
+    <a href="/main"><img src="/res/icon.png" class="mainIcon"></a>
+      <ul class="nav">
+          <li><a href="/main">Timeline</a></li>
+          <li><a href="/">Log out</a></li>
+      </ul>
+    <div id="html-content-holder" class="divPreview" >
+            <%for(var i=0; i< posts.length/3; i++) {  %>
+                <table class="container tablePreview">
+                    <% for(var j=i*3; (j<(i*3)+3)&&(j< posts.length) ; j++){%>
+                        <tr>
+                            <td style="width: 30%" class="tdPost">
+                                <img src="<%= posts[j].postImagePath %>" id="<%= posts[j]._id%>_holder" class="img-rounded" alt="Cinque Terre" width="300" height="220" />
+                            </td>
+                            <td style="width: 70%">
+                                <div class="wrap">
+                                  <div class="elementsInline">
+                                    <label for="<%= posts[j]._id%>_date" class="labelFont">Date</label>
+                                    <input type="text" class="elementSpace" value="<%= posts[j].postDate %>" disabled="true">
+                                    <label for="<%= posts[j]._id%>_location" class="labelFont">At</label>
+                                    <input type="text" class="elementSpace" value="<%= posts[j].postLocation %>" disabled="true">
+                                  </div>
+                                    <textarea disabled="true"><%= posts[j].postContent %></textarea>
+                                </div>
+                            </td>
+                        </tr>
+                        <%}%>
+                </table>
+                <% } %>
+        </div>
+        <div class="divPreview">
+          <input id="btn-Preview-Image" type="button" class="btnProperty btn btn-primary" value="Preview" hidden="false"/>
+          <a href="/thumbnail"><input type="button" class="btnProperty btn btn-primary" name="" value="Back"></a>
+          <a id="btn-Convert-Html2Image" href="#" hidden="true"><input type="button" class="btnProperty btn btn-primary" value="Download" ></a>
+        </div>
+        <div class="divCanvas" id="previewImage">
+        </div>
+
+
+    <script>
+    function hidePreviewButton(){
+        var btnPreview = document.getElementById('btn-Preview-Image');
+        btnPreview.hidden = true;
+    }
+
+
+    $(document).ready(function(){
+    var element = $("#html-content-holder"); // global variable
+    var getCanvas; // global variable
+    var download = document.getElementById('btn-Convert-Html2Image');
+
+        $("#btn-Preview-Image").on('click', function () {
+             html2canvas(element, {
+             onrendered: function (canvas) {
+                    $("#previewImage").append(canvas);
+                    getCanvas = canvas;
+                 }
+             });
+
+             download.hidden = false;
+             $(this).hide();
+        });
+
+    	$("#btn-Convert-Html2Image").on('click', function () {
+        var imgageData = getCanvas.toDataURL("image/png");
+        // Now browser starts downloading it instead of just showing it
+        var newData = imgageData.replace(/^data:image\/png/, "data:application/octet-stream");
+        $("#btn-Convert-Html2Image").attr("download", "your_pic_name.png").attr("href", newData);
+    	});
+
+    });
+
+    </script>
+</body>
+</html>

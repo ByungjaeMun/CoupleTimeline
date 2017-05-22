@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Couple Timeline</title>
+    <link rel='stylesheet' href='/stylesheets/common.css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+    .btnProperty{
+      background-color: pink;
+      border: none;
+      text-align: center;
+      text-decoration:none;
+      display: inline-block;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .btnProperty:hover{
+      background-color: #87CEFA;
+    }
+
+    </style>
+</head>
+
+<body>
+  <div>
+    <img src="/res/icon.png" class="mainIcon">
+  </div>
+  <div class="col-md-4 col-md-push-4">
+    <h1>Log In</h1>
+    <form action="/" method="POST">
+      <div class="form-group">
+        <label for="usr" class="labelFont">ID</label>
+        <input type="text" class="form-control" placeholder="ID" name="id" id="usr" required/>
+      </div>
+      <div class="form-group">
+        <label for="pwd" class="labelFont">Password</label>
+        <input type="password" class="form-control" placeholder="Password" name="password"  id="pwd" required/>
+      </div>
+      <div class="btn-group btn-Ali-Right">
+        <input type="submit" value="LOGIN" class="btnProperty btn btn-primary">
+        <a href="/join"><input type="button" value="JOIN"  class="btnProperty btn btn-primary"></a>
+      </div>
+    </form>
+  </div>
+  <div>
+    <% if(!flag){ %>
+      <h2> Check your input again! </h2>
+      <% } %>
+  </div>
+
+
+</body>
+
+</html>

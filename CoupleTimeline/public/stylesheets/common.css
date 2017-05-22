@@ -1,0 +1,76 @@
+a, a:visited{
+  color : white;
+  text-decoration: none;
+}
+
+a:hover{
+  background-color: #87CEFA;
+  text-decoration: none;
+}
+
+table, td{
+border: 4px solid pink;
+border-collapse: collapse;
+}
+
+h2{
+  color: black;
+  float: right;
+  margin-right: 50px;
+}
+
+.labelFont{
+  font-size: 20px;
+  font-weight: bold;
+  margin-right: 10px;
+  margin-left: 20px;
+}
+h1{
+  text-align: center;
+  padding-bottom: 50px;
+}
+
+.nav{
+  height: 5%;
+  width: 100%;
+  background-color: pink;
+  text-align: right;
+  margin-bottom: 50px;
+}
+
+.nav li{
+  display: inline-block;
+  margin-right: 30px;
+}
+
+.nav li a{
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+:disabled {
+    background-color: white;
+}
+
+.mainIcon{
+  margin-left: 30px;
+  margin-top: 30px;
+  margin-bottom: 50px;
+  display:block;
+}
+
+.format{
+  margin-top: 150px;
+}
+
+.elementsInline{
+  display: inline-flex;
+}
+
+.btn-Ali-Right{
+  float: right;
+}
+
+
+html, body { width: 100%; height: 100%; }
