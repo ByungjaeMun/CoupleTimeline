@@ -66,7 +66,9 @@ app.use('/thumbnail',thumbnail);
 app.use('/preview',preview);
 
 
-mongoose.connect('mongodb://localhost/myDB');
+
+mongoose.connect('mongodb://neo:admin@ds151141.mlab.com:51141/coupletimeline');
+//mongoose.connect('mongodb://localhost/myDB');
 
 
 // CONNECT TO MONGODB SERVER
